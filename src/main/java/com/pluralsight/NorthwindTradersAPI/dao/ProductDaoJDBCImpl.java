@@ -26,7 +26,7 @@ public class ProductDaoJDBCImpl implements ProductDao {
 
 
     @Override
-    public List<Product> add(Product product) {
+    public void add(Product product) {
         String sql = "INSERT INTO Products (ProductName, CategoryID, UnitPrice) VALUES (?,?,?);";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -37,7 +37,6 @@ public class ProductDaoJDBCImpl implements ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return products;
     }
 
     @Override
@@ -111,7 +110,7 @@ public class ProductDaoJDBCImpl implements ProductDao {
     @Override
     public List<Product> getProductByPrice(double price) {
         this.products.clear();
-        String sql = "SELECT ProductID, ProductName, CategoryID, UnitPrice FROM Products WHERE UnitPrice <= ?;";
+        String sql = "SELECT ProductID, ProductName, CategoryID, UnitPrice FROM Products WHERE UnitPrice = ?;";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setDouble(1, price);
@@ -124,6 +123,19 @@ public class ProductDaoJDBCImpl implements ProductDao {
         }
         return this.products;
     }
+
+    @Override
+    public void updateProduct(int id,Product product) {
+        String sql = "UPDATE Products SET ProductName = ?, CategoryID = ?, UnitPrice = ? WHERE ProductID = " + id + ";";
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, product.getName());
+            statement.setInt(2, product.getCategory());
+            statement.setDouble(3, product.getPrice());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }}
 
 
 }

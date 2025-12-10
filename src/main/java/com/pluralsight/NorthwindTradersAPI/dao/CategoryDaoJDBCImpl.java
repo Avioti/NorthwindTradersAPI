@@ -58,18 +58,29 @@ public class CategoryDaoJDBCImpl implements CategoryDao {
     }
 
     @Override
-    public List<Category> insertCategory(Category category) {
+    public void insertCategory(Category category) {
         this.categories.clear();
         String sql = "INSERT INTO categories (CategoryName) VALUES (?);";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, category.getCategoryName());
             statement.executeUpdate();
-            this.categories.add(category);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return this.categories;
+    }
+
+    @Override
+    public void updateCategory(int id,Category category) {
+        this.categories.clear();
+        String sql = "UPDATE categories SET CategoryName = ? WHERE CategoryID = " + id + ";";
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, category.getCategoryName());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

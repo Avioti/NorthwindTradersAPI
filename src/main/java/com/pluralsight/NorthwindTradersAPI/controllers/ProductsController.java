@@ -61,6 +61,11 @@ public class ProductsController {
         productDao.add(product);
     }
 
+    @PutMapping
+    public void updateProduct(@RequestBody Product product) {
+        productDao.updateProduct(product.getProductId(),product);
+    }
+
 
 }
 
