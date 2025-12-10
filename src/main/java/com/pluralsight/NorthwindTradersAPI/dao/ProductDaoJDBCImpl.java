@@ -47,7 +47,8 @@ public class ProductDaoJDBCImpl implements ProductDao {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rows = statement.executeQuery();
             while (rows.next()) {
-                this.products.add(new Product(rows.getInt(1), rows.getString(2), rows.getInt(3), rows.getDouble(4)));
+                this.products.add(new Product(rows.getInt(1), rows.getString(2),
+                        rows.getInt(3), rows.getDouble(4)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,7 +65,8 @@ public class ProductDaoJDBCImpl implements ProductDao {
             statement.setInt(1, id);
             ResultSet rows = statement.executeQuery();
             if (rows.next()) {
-                this.products.add(new Product(rows.getInt(1), rows.getString(2), rows.getInt(3), rows.getDouble(4)));
+                this.products.add(new Product(rows.getInt(1), rows.getString(2),
+                        rows.getInt(3), rows.getDouble(4)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,7 +83,8 @@ public class ProductDaoJDBCImpl implements ProductDao {
             statement.setString(1, "%" + name + "%");
             ResultSet rows = statement.executeQuery();
             while (rows.next()) {
-                this.products.add(new Product(rows.getInt(1), rows.getString(2), rows.getInt(3), rows.getDouble(4)));
+                this.products.add(new Product(rows.getInt(1), rows.getString(2),
+                        rows.getInt(3), rows.getDouble(4)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,7 +102,8 @@ public class ProductDaoJDBCImpl implements ProductDao {
             statement.setInt(1, categoryId);
             ResultSet rows = statement.executeQuery();
             while (rows.next()) {
-                this.products.add(new Product(rows.getInt(1), rows.getString(2), rows.getInt(3), rows.getDouble(4)));
+                this.products.add(new Product(rows.getInt(1), rows.getString(2),
+                        rows.getInt(3), rows.getDouble(4)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,7 +120,8 @@ public class ProductDaoJDBCImpl implements ProductDao {
             statement.setDouble(1, price);
             ResultSet rows = statement.executeQuery();
             while (rows.next()) {
-                this.products.add(new Product(rows.getInt(1), rows.getString(2), rows.getInt(3), rows.getDouble(4)));
+                this.products.add(new Product(rows.getInt(1), rows.getString(2),
+                        rows.getInt(3), rows.getDouble(4)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,7 +130,7 @@ public class ProductDaoJDBCImpl implements ProductDao {
     }
 
     @Override
-    public void updateProduct(int id,Product product) {
+    public void updateProduct(int id, Product product) {
         String sql = "UPDATE Products SET ProductName = ?, CategoryID = ?, UnitPrice = ? WHERE ProductID = " + id + ";";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -135,7 +140,8 @@ public class ProductDaoJDBCImpl implements ProductDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }}
+        }
+    }
 
     @Override
     public void deleteProduct(int id) {
@@ -145,7 +151,9 @@ public class ProductDaoJDBCImpl implements ProductDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace(); }}
+            e.printStackTrace();
+        }
+    }
 
 
 }

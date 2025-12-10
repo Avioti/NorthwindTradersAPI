@@ -71,7 +71,7 @@ public class CategoryDaoJDBCImpl implements CategoryDao {
     }
 
     @Override
-    public void updateCategory(int id,Category category) {
+    public void updateCategory(int id, Category category) {
         this.categories.clear();
         String sql = "UPDATE categories SET CategoryName = ? WHERE CategoryID = " + id + ";";
         try (Connection connection = dataSource.getConnection()) {
@@ -85,7 +85,7 @@ public class CategoryDaoJDBCImpl implements CategoryDao {
 
 
     @Override
-    public void deleteCategory(int id){
+    public void deleteCategory(int id) {
         String query = "DELETE FROM categories WHERE CategoryID = ?;";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);

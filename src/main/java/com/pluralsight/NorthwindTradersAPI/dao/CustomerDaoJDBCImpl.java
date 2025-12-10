@@ -26,14 +26,14 @@ public class CustomerDaoJDBCImpl implements CustomerDao {
     public List<Customer> getAll() {
         this.customers.clear();
         String sql = "SELECT CustomerID, CompanyName, ContactName, ContactTitle FROM Customers;";
-        try(Connection connection = dataSource.getConnection()){
+        try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rows = statement.executeQuery();
-            while(rows.next()){
-                this.customers.add(new Customer(rows.getString(1), rows.getString(2), rows.getString(3),rows.getString(4)));
+            while (rows.next()) {
+                this.customers.add(new Customer(rows.getString(1), rows.getString(2),
+                        rows.getString(3), rows.getString(4)));
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return this.customers;
