@@ -137,5 +137,15 @@ public class ProductDaoJDBCImpl implements ProductDao {
             e.printStackTrace();
         }}
 
+    @Override
+    public void deleteProduct(int id) {
+        String sql = "DELETE FROM Products WHERE ProductID = ?;";
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); }}
+
 
 }

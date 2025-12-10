@@ -67,5 +67,11 @@ public class ProductsController {
     }
 
 
+    @DeleteMapping
+    public void deleteProduct(@RequestBody Product product) {
+        productDao.deleteProduct(product.getProductId());
+    }
+
+
 }
 

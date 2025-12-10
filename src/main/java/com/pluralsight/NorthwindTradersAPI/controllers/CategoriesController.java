@@ -46,5 +46,10 @@ public class CategoriesController {
         categoryDao.updateCategory(category.getCategoryID(), category);
     }
 
+    @DeleteMapping
+    public void deleteCategory(@RequestBody Category category) {
+        categoryDao.deleteCategory(category.getCategoryID());
+    }
+
 
 }

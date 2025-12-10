@@ -15,4 +15,5 @@ public interface ProductDao {
     public List<Product> getProductByPrice(double price);
     public List<Product> getProductById(int id);
     public void updateProduct(int id, Product product);
+    public void deleteProduct(int id);
 }
