@@ -5,6 +5,7 @@ import com.pluralsight.NorthwindTradersAPI.dao.CategoryDao;
 import com.pluralsight.NorthwindTradersAPI.model.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +33,13 @@ public class CategoriesController {
 
     @GetMapping(ID_PATH)
     public Category getCategoryById(@PathVariable int id) {
-        return categoryDao.getCategoryId(id).stream().findFirst().orElse(null);}
+        return categoryDao.getCategoryId(id).stream().findFirst().orElse(null);
+    }
+
+    @PostMapping
+    public void insertCategory(@RequestBody Category category) {
+        categoryDao.insertCategory(category);
+    }
 
 
 }

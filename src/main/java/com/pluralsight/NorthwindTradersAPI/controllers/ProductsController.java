@@ -55,5 +55,12 @@ public class ProductsController {
     public List<Product> getProductsByPrice(@PathVariable double price) {
         return productDao.getProductByPrice(price);
     }
+
+    @PostMapping
+    public void add(@RequestBody Product product) {
+        productDao.add(product);
+    }
+
+
 }
 

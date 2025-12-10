@@ -57,5 +57,20 @@ public class CategoryDaoJDBCImpl implements CategoryDao {
         return this.categories;
     }
 
+    @Override
+    public List<Category> insertCategory(Category category) {
+        this.categories.clear();
+        String sql = "INSERT INTO categories (CategoryName) VALUES (?);";
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, category.getCategoryName());
+            statement.executeUpdate();
+            this.categories.add(category);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return this.categories;
+    }
+
 
 }
